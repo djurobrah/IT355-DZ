@@ -19,4 +19,12 @@ public class HomepageController
         return "index";
     }
     
+    @RequestMapping("/about/")
+    public String about(Model model)
+    {
+        //attributes that we forward to the mapped page
+        //model.addAttribute("prcatr", "bla");
+        return "about";
+    }
+    
 }

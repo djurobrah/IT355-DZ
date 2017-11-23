@@ -1,6 +1,6 @@
 package djuricadjuricic.it355dz.domain;
 
-public class Car 
+public class Article 
 {
-    
+
 }

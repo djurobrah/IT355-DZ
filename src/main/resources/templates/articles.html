@@ -2,19 +2,21 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Hello, world!</title>
+    <title>a3sth3tics</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css" th:href=@{/css/style.css}>
+    <link rel="stylesheet" href="../static/css/style.css" th:href=@{/css/style.css}>
 </head>
 
 <body>
+    <!--    thymeleaf fragment-->
+    <div th:replace="fragments/navbar :: navbar">&nbsp;</div>
     <!--from model-->
-    <h1 th:text="${bla}">bla</h1>
+    <h1 th:text="${bla}">artikli</h1>
     <!--from messages.properties-->
     <h1 th:text="#{penis}">penisdefault</h1>
     <!-- Optional JavaScript -->

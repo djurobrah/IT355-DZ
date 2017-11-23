@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="../../static/css/style.css" th:href=@{/css/style.css}>-->
+</head>
+
+<body>
+    <!--    MOZDA CU MORATI DA PROMENIM THHREFOVE U APSOLUTNE URLOVE-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:fragment="navbar">
+        <a class="navbar-brand" href="../index.html" th:href="@{/}">A3STH3TICS.</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="../about.html" th:href="@{/about/}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../articles.html" th:href="@{/articles/}">Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../authors.html" th:href="@{/authors/}">Authors</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Sign In</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+
+</html>
