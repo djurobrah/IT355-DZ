@@ -1,5 +1,7 @@
 package djuricadjuricic.it355dz.controller;
 
+import djuricadjuricic.it355dz.service.AuthorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthorController 
 {
     
-    //Forwarding attributes to this page if needed
+    //Use a model to forward atributes used by this page
+    //Model atributes should be provided by an Autowired service
+    @Autowired
+    AuthorService authorService;
+
     
     @RequestMapping("/")
-    public String prc(Model model)
-    {        
-        //getting attributes that THIS page uses
-        
-        //model.addAttribute("atribut", print());
+    public String authors(Model model)
+    {                
+        model.addAttribute("authors", authorService.getAllAuthors());
         return "authors";
     }
     

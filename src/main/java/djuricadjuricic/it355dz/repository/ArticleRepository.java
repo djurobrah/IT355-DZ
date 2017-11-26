@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
  
 public interface ArticleRepository extends CrudRepository<Article, Long> //parameters are Entity and Type of ID key
 {
-    
+    //define custom methods that are not in Crud Repository
+    //use this: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-creation
 }

@@ -19,6 +19,9 @@ public class HomepageController
         return "index";
     }
     
+    
+    //Requesting mapping for all links that can be reached through this page (that don't need their controller)
+    
     @RequestMapping("/about/")
     public String about(Model model)
     {

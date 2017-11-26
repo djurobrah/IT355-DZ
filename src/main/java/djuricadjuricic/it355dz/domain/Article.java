@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class Article 
@@ -16,9 +17,15 @@ public class Article
     
     private String title;
     
+    private String slug;
+    
+    @Column(columnDefinition = "TEXT") //when varchar(255) is not enough
+    private String teaser;
+    
     @Column(columnDefinition = "TEXT") //when varchar(255) is not enough
     private String body;
     
+    @CreatedDate @Column( columnDefinition = "TIMESTAMP" ) //timestamp is more precise
     private Date posted;
     
     @ManyToOne //needed by Hibernate engine (we have many articles with one author)
@@ -41,6 +48,26 @@ public class Article
         this.title = title;
     }
 
+    public String getSlug()
+    {
+        return slug;
+    }
+
+    public void setSlug(String slug)
+    {
+        this.slug = slug;
+    }
+
+    public String getTeaser()
+    {
+        return teaser;
+    }
+
+    public void setTeaser(String teaser)
+    {
+        this.teaser = teaser;
+    }
+
     public String getBody()
     {
         return body;
@@ -59,7 +86,7 @@ public class Article
     public void setPosted(Date posted)
     {
         this.posted = posted;
-    }    
+    }
 
     public Author getAuthor()
     {
@@ -71,8 +98,6 @@ public class Article
         this.author = author;
     }
     
-    
-
     @Override
     public String toString()
     {

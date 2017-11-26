@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DataLoader //used to load data without using a external file
 {
+    //declare all EntityRepositories that you will be writing into
     private ArticleRepository articleRepository;
     private AuthorRepository authorRepository;
     
+    //make a Autowired DataLoader like below ( //COMMENT IT OUT TO DISABLE THIS DATALOADER )
     @Autowired
     public DataLoader(ArticleRepository articleRepository, AuthorRepository authorRepository)
     {
@@ -23,11 +25,15 @@ public class DataLoader //used to load data without using a external file
     }
     
     @PostConstruct //runs after Bean created
-    private void LoadData()
+    private void loadData() //fill database with desired data
     {
         Author author1 = new Author("djuro");
         author1.setAbout("DSGFSHFHSDHFSHODFOSHDFHSODHFSHODFHOSDF");
         authorRepository.save(author1);
+        
+        Author author2 = new Author("djuro2");
+        author2.setAbout("znj");
+        authorRepository.save(author2);
         
         Article article1 = new Article("articleTitleee1");
         article1.setBody("dgsdssfkihdsdfhsdhfhdsolfsldflslsdhfs");
@@ -38,7 +44,7 @@ public class DataLoader //used to load data without using a external file
         Article article2 = new Article("articleTitleee2");
         article2.setBody("dgsdssfkihdsdfhsdsdfhfdsfsdfs");
         article2.setPosted(new Date());
-        article2.setAuthor(author1);
+        article2.setAuthor(author2);
         articleRepository.save(article2);
     }
 }
