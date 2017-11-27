@@ -1,47 +1,28 @@
 <!doctype html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <title>a3sth3tics</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <!--    custom CSS files-->
-    <link rel="stylesheet" href="../static/css/style.css" th:href=@{/css/style.css}>
-    <link rel="stylesheet" href="../static/css/footer.css" th:href=@{/css/footer.css}>
-    <!--    fontAwesome CSS-->
-    <link href='https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' th:href="@{https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}" />
-</head>
+<head th:replace="layout :: head"></head>
 
 <body>
-    <!--    thymeleaf fragment-->
-    <div th:replace="fragments/navbar :: navbar">&nbsp;</div>
-    <hr/>
-    <div th:each="article : ${articles}">
-        <h1><a th:text="${article.title}" href="articleView.html" th:href="|@{/articles/view/}${article.slug}|">Article title</a></h1>
-        <p th:text="|Created by ${article.author.name} on ${#calendars.format(article.posted,'M/dd/yyyy hh:mm')}|">
-            Created by AuthorName on M/dd/yy hh:mm
-        </p>
-        <!--        section tag and th:utext so that it renders html5-->
-        <section th:utext="${article.teaser}">
-            Article teaser here.
-        </section>
-        <!--        divider-->
-        <hr/>
+    <div th:replace="layout :: navbar"></div>
 
+    <hr/>
+    <div id="content" class="container">
+        <div th:each="article : ${articles}">
+            <h1><a th:text="${article.title}" href="articleView.html" th:href="|@{/articles/view/}${article.slug}|">Article title</a></h1>
+            <p th:text="|Created by ${article.author.name} on ${#calendars.format(article.posted,'M/dd/yyyy hh:mm')}|">
+                Created by AuthorName on M/dd/yy hh:mm
+            </p>
+            <!--        section tag and th:utext so that it renders html5-->
+            <section th:utext="${article.teaser}">
+                Article teaser here.
+            </section>
+            <!--        divider-->
+            <hr/>
+        </div>
     </div>
 
-    <div th:replace="fragments/footer :: footer">&nbsp;</div>
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <div th:replace="layout :: footer"></div>
 </body>
 
 </html>

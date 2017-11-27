@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+
+    <title>a3sth3tics</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- User CSS files-->
+    <link rel="stylesheet" href="../static/css/style.css" th:href=@{/css/style.css}>
+    <link rel="stylesheet" href="../static/css/footer.css" th:href=@{/css/footer.css}>
+    <!-- FontAwesome CSS-->
+    <link href='https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' th:href="@{https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}" />
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</head>
+<!--    HEADER  -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:fragment="navbar">
+    <a class="navbar-brand" href="../index.html" th:href="@{/}">A3STH3TICS.</a>
+    <ul class="navbar-nav mr-auto">
+        <!-- thymeleafs method of adding to class name, which in this case checks the URL to set the active link-->
+        <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/about/' ? 'active':''}">
+            <a class="nav-link" href="../about.html" th:href="@{/about/}"><span>About</span></a>
+        </li>
+        <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/articles/' ? 'active':''}">
+            <a class="nav-link" href="../articles.html" th:href="@{/articles/}"><span>Articles</span></a>
+        </li>
+        <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/authors/' ? 'active':''}">
+            <a class="nav-link" href="../authors.html" th:href="@{/authors/}"><span>Authors</span></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">Sign In</a>
+        </li>
+    </ul>
+</nav>
+
+
+<!--    CONTENT  -->
+<div loading...></div>
+
+
+<!--    HEADER  -->
+<div th:fragment="footer">
+    <div class="col-sm-12">
+        <div class="about">
+            <hr/>
+            <p>Don't want to miss a single article? Follow us on other media platforms.</p>
+            <div class="social-media">
+                <ul class="list-inline">
+                    <li><a href="https://www.facebook.com/djurobrah" title=""><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.instagram.com/djuro_brah/" title=""><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://github.com/djurobrah/IT355-DZ" title=""><i class="fa fa-github"></i></a></li>
+                </ul>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>
+
+<body>
+
+</body>
+
+</html>
