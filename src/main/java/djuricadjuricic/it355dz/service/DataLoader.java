@@ -36,13 +36,17 @@ public class DataLoader //used to load data without using a external file
         authorRepository.save(author2);
         
         Article article1 = new Article("articleTitleee1");
-        article1.setBody("dgsdssfkihdsdfhsdhfhdsolfsldflslsdhfs");
+        article1.setSlug("article1");
+        article1.setTeaser("dgsdssfkihdsdfhsdhfhdsolfsldflslsdhfs");
+        article1.setBody("dgsdssfkihdsdfhsdhfhdsolfsldflslsdhfsdgsdssfkihdsdfhsdhfhdsolfsldflslsdhfsdgsdssfkihdsdfhsdhfhdsolfsldflslsdhfs");
         article1.setPosted(new Date());
         article1.setAuthor(author1);
         articleRepository.save(article1);
         
         Article article2 = new Article("articleTitleee2");
-        article2.setBody("dgsdssfkihdsdfhsdsdfhfdsfsdfs");
+        article2.setSlug("article2");
+        article2.setTeaser("abcabcabcabc");
+        article2.setBody("abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc");
         article2.setPosted(new Date());
         article2.setAuthor(author2);
         articleRepository.save(article2);

@@ -1,0 +1,36 @@
+.about {
+    margin: 0 auto;
+    margin-top: 40px;
+    max-width: 1170px;
+    text-align: center;
+}
+
+.about p {
+    font-size: 16px;
+    font-weight: 350;
+    color: #007bff;
+    margin-top: 25px;
+}
+
+.about .social-media {}
+
+.about .social-media ul li {
+    display: inline-block;
+}
+
+.about .social-media ul li a {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #007bff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.about .social-media ul li a:hover {
+    background: #007bff;
+    color: #ededed;
+    border-color: #007bff;
+}

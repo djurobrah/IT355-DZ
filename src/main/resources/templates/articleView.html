@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>a3sth3tics</title>
@@ -9,48 +9,28 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!--    custom CSS files-->
     <link rel="stylesheet" href="../static/css/style.css" th:href=@{/css/style.css}>
-
-    <!--    fontChanging-->
-    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Bangers', cursive;
-        }
-
-    </style>
-
-    <!--redirecting to another URL-->
-    <meta http-equiv="refresh" content="1; URL='http://localhost:8080/about/'" />
-    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <link rel="stylesheet" href="../static/css/footer.css" th:href=@{/css/footer.css}>
+    <!--    fontAwesome CSS-->
+    <link href='https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' th:href="@{https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}" />
 </head>
 
-
 <body>
-    <div class="container">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 id="homepageText">IT355-DZ</h1>
-            </div>
+    <!--    thymeleaf fragment-->
+    <div th:replace="fragments/navbar :: navbar">&nbsp;</div>
 
-        </div>
-    </div>
-    <style>
-        jumbotron {
-            vertical-align: middle;
-            margin-top: 200px;
-            width: 100%;
-            height: 100%;
-        }
 
-    </style>
+    <h1 th:utext="${article.body}">telo</h1>
+
+    <div th:replace="fragments/footer :: footer">&nbsp;</div>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
-
 
 </html>

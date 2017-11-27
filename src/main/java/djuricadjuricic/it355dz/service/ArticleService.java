@@ -18,9 +18,14 @@ public class ArticleService //used to load a single entity into db
 
     // below define all methods that our EntityService will need
 
-    public Iterable<Article> getAllArticles()
+    public Article getBySlug(String slug)
     {
-        return articleRepository.findAll();
+        return articleRepository.findBySlug(slug);
+    }
+
+    public Iterable<Article> findAllByOrderByPostedDesc()
+    {
+        return articleRepository.findAllByOrderByPostedDesc();
     }
     
 }
