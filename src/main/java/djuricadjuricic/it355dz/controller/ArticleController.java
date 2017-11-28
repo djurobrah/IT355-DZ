@@ -2,6 +2,7 @@ package djuricadjuricic.it355dz.controller;
 
 import djuricadjuricic.it355dz.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ public class ArticleController
     @Autowired
     ArticleService articleService;
     
-    
+//    @Secured("ROLE_USER") //declare which user role can access this. For mlt. roles use ({"dfds", "dfgdfg"}
     @RequestMapping("/")
     public String articles(Model model)
     {        
@@ -45,5 +46,4 @@ public class ArticleController
 //        return "sta";
 //    }
 
-        // mapiraj odavde pojedinacne artikle
 }

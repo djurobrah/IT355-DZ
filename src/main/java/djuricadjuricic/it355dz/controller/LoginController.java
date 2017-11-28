@@ -9,33 +9,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //@Controller if forwarding a html, @RestController if forwarding Strings etc.
 
 @Controller
-@RequestMapping("/authors")
-public class AuthorController 
+public class LoginController 
 {
     
     //Use a model to forward atributes used by this page
     //Model atributes should be provided by an Autowired service
-    @Autowired
-    AuthorService authorService;
+//    @Autowired
+//    AuthorService authorService;
 
     
-    @RequestMapping("/")
-    public String authors(Model model)
+    @RequestMapping("/login/")
+    public String login(Model model)
     {                
-        model.addAttribute("authors", authorService.getAllAuthors());
-        return "authors";
+        //model.addAttribute("authors", authorService.getAllAuthors());
+        return "login";
     }
     
     
     //Requesting mapping for all links that can be reached through this page (that don't have their controller)
     
-//    @RequestMapping("/sta")
-//    public String sta(Model model)
-//    {
-//        //attributes that we forward to the mapped page
-//        
-//        //model.addAttribute("prcatr", "bla");
-//        return "sta";
-//    }
+    @RequestMapping("/login-error/")
+    public String loginError(Model model)
+    {
+        //attributes that we forward to the mapped page
+        
+        model.addAttribute("loginError", true);
+        return "login";
+    }
+    
+    @RequestMapping("/logout/")
+    public String logout(Model model)
+    {
+        //attributes that we forward to the mapped page
+        
+        model.addAttribute("logout", true);
+        return "login";
+    }
 
 }

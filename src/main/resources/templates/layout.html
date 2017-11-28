@@ -39,11 +39,20 @@
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link">Register</a>
+        <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/register/' ? 'active':''}">
+            <a class="nav-link" href="../register.html" th:href="@{/register/}" sec:authorize="!isAuthenticated()"><span>Register</span></a>
         </li>
+        <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/login/' ? 'active':''}">
+            <a class="nav-link" href="../login.html" th:href="@{/login/}" sec:authorize="!isAuthenticated()"><span>Log in</span></a>
+        </li>
+        <span class="navbar-text" sec:authorize="isAuthenticated()">
+            Welcome, &nbsp; 
+        </span>
+        <span class="navbar-text" sec:authorize="isAuthenticated()" sec:authentication="name">
+            Username
+        </span>
         <li class="nav-item">
-            <a class="nav-link">Sign In</a>
+            <a class="nav-link" href="../login?logout" th:href="@{/logout/}" sec:authorize="isAuthenticated()"><span>Log out</span></a>
         </li>
     </ul>
 </nav>

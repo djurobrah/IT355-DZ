@@ -1,3 +1,7 @@
 body {
     background-color: #ededed
 }
+
+.form-signin-heading {
+    margin-top: 300px;
+}
