@@ -14,6 +14,7 @@ public class Author
     @GeneratedValue
     private Long id;
     
+    @Column(unique = true, nullable = false)
     String name;
     
     @Column(columnDefinition = "TEXT") //when varchar(255) is not enough

@@ -15,8 +15,10 @@ public class Article
     @GeneratedValue
     private long id;
     
+    @Column(unique = true, nullable = false)
     private String title;
     
+    @Column(unique = true, nullable = false)
     private String slug;
     
     @Column(columnDefinition = "TEXT") //when varchar(255) is not enough

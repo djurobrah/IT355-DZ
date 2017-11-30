@@ -45,15 +45,13 @@
         <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/login/' ? 'active':''}">
             <a class="nav-link" href="../login.html" th:href="@{/login/}" sec:authorize="!isAuthenticated()"><span>Log in</span></a>
         </li>
+         
         <span class="navbar-text" sec:authorize="isAuthenticated()">
-            Welcome, &nbsp; 
+            Welcome <span sec:authentication="name">Guest</span>.
         </span>
-        <span class="navbar-text" sec:authorize="isAuthenticated()" sec:authentication="name">
-            Username
-        </span>
-        <li class="nav-item">
-            <a class="nav-link" href="../login?logout" th:href="@{/logout/}" sec:authorize="isAuthenticated()"><span>Log out</span></a>
-        </li>
+        <form id="frmlogout" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <a class="nav-link" href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
+        </form>
     </ul>
 </nav>
 

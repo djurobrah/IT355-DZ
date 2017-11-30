@@ -6,28 +6,32 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableGlobalMethodSecurity( securedEnabled = true ) //enables securing methods
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
+    @Autowired
+    private UserDetailsService userService;
+    
     @Autowired //setting up users without database
     public void configureAuth(AuthenticationManagerBuilder auth) throws Exception
     {
-        auth.
-                inMemoryAuthentication().
-                withUser("admin").
-                password("123123").
-                roles("ADMIN").
-                and().
-                withUser("user").
-                password("123123").
-                roles("USER").
-                and().
-                withUser("member").
-                password("123123").
-                roles("MEMBER");
-                
+//        auth.
+//                inMemoryAuthentication().
+//                withUser("admin").
+//                password("123123").
+//                roles("ADMIN").
+//                and().
+//                withUser("author").
+//                password("123123").
+//                roles("USER").
+//                and().
+//                withUser("member").
+//                password("123123").
+//                roles("MEMBER");
+          auth.userDetailsService(userService);
     }
 
     @Override  //allowing different roles different methods without the @secured
@@ -43,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     and().
                 formLogin().
                     loginPage("/login/").
+                    //.usernameParameter("email") incase we need to set an username parameter
                     failureUrl("/login-error/"). //login-error mapping in Controller returns login.html with a model
                     permitAll().// don't forget permiting all for login
                     and().
