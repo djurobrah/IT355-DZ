@@ -7,7 +7,18 @@
     <div th:replace="layout :: navbar"></div>
 
     <div id="content" class="container">
-        <h1 th:utext="${article.body}">telo</h1>
+
+        <h1><a th:text="${article.title}">Article title</a></h1>
+        <p th:text="|Created by ${article.author.name} on ${#calendars.format(article.posted,'M/dd/yyyy hh:mm')}|">
+            Created by AuthorName on M/dd/yy hh:mm
+        </p>
+        <!--        section tag and th:utext so that it renders html5-->
+        <section th:utext="${article.body}">
+            Article body here.
+        </section>
+        <!--        divider-->
+        <hr/>
+        <p><a class="btn btn-primary btn-lg" href="articles.html" th:href="@{/articles/}" role="button">« Back to articles</a></p>
     </div>
 
     <div th:replace="layout :: footer"></div>

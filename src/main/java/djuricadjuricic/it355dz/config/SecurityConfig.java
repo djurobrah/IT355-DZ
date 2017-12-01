@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     and().
                 formLogin().
                     loginPage("/login/").
-                    //.usernameParameter("email") incase we need to set an username parameter
+                    //.usernameParameter("email") incase we need to set a different username parameter
                     failureUrl("/login-error/"). //login-error mapping in Controller returns login.html with a model
                     permitAll().// don't forget permiting all for login
                     and().
