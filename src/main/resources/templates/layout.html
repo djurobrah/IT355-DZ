@@ -10,6 +10,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!--    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.css" th:href=@{/css/bootstrap/bootstrap.min.css} crossorigin="anonymous" media="screen">-->
+    <!--    VIDETI ZASTO OVO NE RADI-->
+
+
     <!-- User CSS files-->
     <link rel="stylesheet" href="../static/css/style.css" th:href=@{/css/style.css}>
     <link rel="stylesheet" href="../static/css/footer.css" th:href=@{/css/footer.css}>
@@ -25,7 +29,10 @@
 </head>
 <!--    HEADER  -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:fragment="navbar">
-    <a class="navbar-brand" href="../index.html" th:href="@{/}">A3STH3TICS.</a>
+    <a class="navbar-brand" href="../index.html" th:href="@{/}">
+        <img src="/static/img/icon.png" th:src="@{/img/icon.png}" width=100 height=40>
+    </a>
+    <!--    <a class="navbar-brand" href="../index.html" th:href="@{/}">A3STH3TICS.</a>-->
     <ul class="navbar-nav mr-auto">
         <!-- thymeleafs method of adding to class name, which in this case checks the URL to set the active link-->
         <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/about/' ? 'active':''}">
@@ -45,7 +52,7 @@
         <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/login/' ? 'active':''}">
             <a class="nav-link" href="../login.html" th:href="@{/login/}" sec:authorize="!isAuthenticated()"><span>Log in</span></a>
         </li>
-         
+
         <span class="navbar-text" sec:authorize="isAuthenticated()">
             Welcome <span sec:authentication="name">Guest</span>.
         </span>
@@ -65,6 +72,7 @@
     <div class="col-sm-12">
         <div class="about">
             <hr/>
+            <img src="/static/img/iconBlue.png" th:src="@{/img/iconBlue.png}" height=100>
             <p>Don't want to miss a single article? Follow us on other media platforms.</p>
             <div class="social-media">
                 <ul class="list-inline">
