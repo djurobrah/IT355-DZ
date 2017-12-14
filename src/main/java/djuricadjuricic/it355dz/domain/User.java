@@ -1,8 +1,10 @@
 package djuricadjuricic.it355dz.domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +28,7 @@ public class User
 
     @Column(unique = true, nullable = false)
     private String username;
-    
+
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -45,12 +49,12 @@ public class User
     )
     private Set<Role> roles = new HashSet<Role>();
 
-    public User(String username)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    private Author author;
+
+    public User()
     {
-        this.username = username;
-    }
-    
-    private User(){} //empty private constr. needed by JPA
+    } //empty constr. needed by JPA
 
     public Long getId()
     {
@@ -101,7 +105,17 @@ public class User
     {
         this.roles = roles;
     }
-    
+
+    public Author getAuthor()
+    {
+        return author;
+    }
+
+    public void setAuthor(Author author)
+    {
+        this.author = author;
+    }
+
     @Override
     public String toString()
     {

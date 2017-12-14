@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head"></head>
+
+<body>
+    <div th:replace="layout :: navbar"></div>
+
+    <div id="content" class="comtainer jumbotron">
+        <h1 class="form-signin-heading">Register</h1>
+
+        <form th:object="${user}" th:action="@{/register-success/}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="username">Username</label>:
+            <input type="text" id="username" name="username" autofocus="autofocus" required="true" th:field="*{username}" /> <br />
+
+            <label for="email">E-mail</label>:
+            <input type="email" id="email" name="email" autofocus="autofocus" required="true" th:field="*{email}" /> <br />
+
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password" required="true" th:field="*{password}" /> <br/>
+
+            <input type="submit" class="btn btn-lg" />
+        </form>
+
+    </div>
+    <div th:replace="layout :: footer"></div>
+</body>
+
+</html>

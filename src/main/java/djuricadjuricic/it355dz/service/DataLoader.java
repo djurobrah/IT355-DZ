@@ -37,14 +37,23 @@ public class DataLoader //used to load data without using a external file
     @PostConstruct //runs after Bean created
     private void loadData() //fill database with desired data
     {
+       
+        User u1 = new User();
+        u1.setUsername("Djurica Djuricic");
+        u1.setPassword("123123");
+        u1.setEmail("djurica.djuricic.2727@metropolitan.ac.rs");
+        
         Author author1 = new Author("Djurica Djuricic");
         author1.setAbout("The founder of this site. He was once a fat fuck but he searched the depths of the internet to find his"+
                 " salvation. Once he reached godly aesthetics, he made this site, in hopes to save all the fat cunts.");
-        authorRepository.save(author1);
+        
+        author1.setUser(u1);
+        u1.setAuthor(author1);
+        
         
         Author author2 = new Author("Zyzz");
         author2.setAbout("The aesthetic god himself. His transformation from a WoW geek to a diety has inspired milions.");
-        authorRepository.save(author2);
+        //author2.setUser(u1);
         
         Article article1 = new Article("First steps");
         article1.setSlug("first-steps");
@@ -57,7 +66,7 @@ public class DataLoader //used to load data without using a external file
                 + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
         article1.setPosted(new Date());
         article1.setAuthor(author1);
-        articleRepository.save(article1);
+        
         
         Article article2 = new Article("Dieting");
         article2.setSlug("dieting");
@@ -71,22 +80,34 @@ public class DataLoader //used to load data without using a external file
                 + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
         article2.setPosted(new Date());
         article2.setAuthor(author2);
-        articleRepository.save(article2);
-        
-        User u1 = new User("Djurica Djuricic");
-        u1.setPassword("123123");
-        u1.setEmail("djurica.djuricic.2727@metropolitan.ac.rs");
         
         Role r1 = new Role("ROLE_AUTHOR");
+        Role r2 = new Role("ROLE_ADMIN");
+        Role r3 = new Role("ROLE_USER");
         
         Set<User> users = new HashSet<User>();
         users.add(u1);
         Set<Role> roles = new HashSet<Role>();
         roles.add(r1);
+
         u1.setRoles(roles);
         r1.setUsers(users);
         
+        
         userRepository.save(u1);
+        
+        
+        authorRepository.save(author1);
+        //authorRepository.save(author2);
+        
+        articleRepository.save(article1);
+        //articleRepository.save(article2);
+        
+        
+        
         roleRepository.save(r1);
+        roleRepository.save(r2);
+        roleRepository.save(r3);
+        
     }
 }

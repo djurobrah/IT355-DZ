@@ -3,24 +3,31 @@
 
 <head th:replace="layout :: head"></head>
 
+<!--CSS FOR THIS FRAGMENT-->
+<link rel="stylesheet" href="../static/css/login.css" th:href=@{/css/login.css}>
 
 <body>
     <div th:replace="layout :: navbar"></div>
 
     <div id="content" class="container">
-        <h1 class="form-signin-heading">Log in</h1>
-        <!--        if module attribute loginError passed by loginController is true show-->
-        <p th:if="${loginError}" class="alert alert-danger">Wrong username or password</p>
-        <!--        if parameter logout is passed by SecurityConfig show-->
-        <p th:if="${logout}" class="alert alert-success">You've been logged out</p>
+        <div class="col-sm-12">
+            <!--        if module attribute registerSuccess passed by loginController is true show-->
+            <p th:if="${registerSuccess}" class="alert alert-success">Account successfully registered.</p>
 
-        <form th:action="@{/login/}" method="post">
-            <label for="username">Username</label>:
-            <input type="text" id="username" name="username" autofocus="autofocus" required="true" /> <br />
-            <label for="password">Password</label>:
-            <input type="password" id="password" name="password" required="true" /> <br />
-            <input type="submit" value="Log in" />
-        </form>
+            <h1 class="form-signin-heading">Log in</h1>
+            <!--        if module attribute loginError passed by loginController is true show-->
+            <p th:if="${loginError}" class="alert alert-danger">Wrong username or password</p>
+            <!--        if parameter logout is passed by SecurityConfig show-->
+            <p th:if="${logout}" class="alert alert-success">You've been logged out</p>
+
+            <form th:action="@{/login/}" method="post">
+                <label for="username">Username</label>:
+                <input type="text" id="username" name="username" autofocus="autofocus" required="true" /> <br />
+                <label for="password">Password</label>:
+                <input type="password" id="password" name="password" required="true" /> <br />
+                <input type="submit" class="btn btn-lg" value="Log in" />
+            </form>
+        </div>
     </div>
 
     <div th:replace="layout :: footer"></div>

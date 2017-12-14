@@ -9,32 +9,36 @@ import javax.persistence.ManyToOne;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-public class Article 
+public class Article
 {
+
     @Id
     @GeneratedValue
     private long id;
-    
+
     @Column(unique = true, nullable = false)
     private String title;
-    
+
     @Column(unique = true, nullable = false)
     private String slug;
-    
+
     @Column(columnDefinition = "TEXT") //when varchar(255) is not enough
     private String teaser;
-    
+
     @Column(columnDefinition = "TEXT") //when varchar(255) is not enough
     private String body;
-    
-    @CreatedDate @Column( columnDefinition = "TIMESTAMP" ) //timestamp is more precise
+
+    @CreatedDate
+    @Column(columnDefinition = "TIMESTAMP") //timestamp is more precise
     private Date posted;
-    
+
     @ManyToOne //needed by Hibernate engine (we have many articles with one author)
     private Author author;
-    
-    private Article(){} //empty private constr. needed by JPA
-    
+
+    private Article()
+    {
+    } //empty private constr. needed by JPA
+
     public Article(String title)
     {
         this.title = title;
@@ -99,16 +103,11 @@ public class Article
     {
         this.author = author;
     }
-    
+
     @Override
     public String toString()
     {
         return "Article{" + "title=" + title + '}';
     }
 
-    
-    
-    
-    
-    
 }

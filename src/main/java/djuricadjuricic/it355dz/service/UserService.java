@@ -39,5 +39,10 @@ public class UserService implements UserDetailsService//used to load a single en
             return new UserDetailsImpl(user);
         }
     }
+
+    public void save(User user)
+    {
+        userRepository.save(user);
+    }
     
 }
