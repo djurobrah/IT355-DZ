@@ -1,6 +1,8 @@
 package djuricadjuricic.it355dz.controller;
 
+import djuricadjuricic.it355dz.domain.User;
 import djuricadjuricic.it355dz.service.ArticleService;
+import djuricadjuricic.it355dz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,10 @@ public class ArticleController
     @Autowired
     ArticleService articleService;
     
-//    @Secured("ROLE_USER") //declare which user role can access this. For mlt. roles use ({"dfds", "dfgdfg"}
+    @Autowired
+    UserService userService;
+    
+//    @Secured("ROLE_USER") //declare which user role can access this. For mult. roles use ({"dfds", "dfgdfg"}
     @RequestMapping("/")
     public String articles(Model model)
     {        
@@ -35,6 +40,17 @@ public class ArticleController
         model.addAttribute("article", articleService.getBySlug(slug));
         return "articleView";
     }
+    
+//    @RequestMapping("/{username}")
+//    public String articlesByAuthor(@PathVariable(value = "username")String username, Model model)
+//    {
+//        //attributes that we forward to the mapped page
+//        User user = userService.findByUsername(username);
+//        Author author = authorService.findById(user.getId());
+//        model.addAttribute("articlesByAuthor", articleService.g));
+//        return "articleView";
+//    }
+    
     //Requesting mapping for all links that can be reached through this page (that don't have their controller)
     
 //    @RequestMapping("/sta")

@@ -68,7 +68,7 @@ public class LoginController
     {
         //attributes that we forward to the mapped page
         //model.addAttribute("registerSuccess", true);
-        user.getRoles().add(roleService.getById(1));
+        user.getRoles().add(roleService.getById(1)); //hardcoded to 1 == author
         userService.save(user);
         return "login";
     }

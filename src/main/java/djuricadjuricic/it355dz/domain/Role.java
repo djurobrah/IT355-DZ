@@ -28,9 +28,9 @@ public class Role
         this.role = role;
     }
 
-    private Role()
+    public Role()
     {
-    } //empty private constr. needed by JPA
+    } //empty constr. needed by JPA
 
     public Long getId()
     {

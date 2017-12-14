@@ -33,15 +33,20 @@ public class Article
     private Date posted;
 
     @ManyToOne //needed by Hibernate engine (we have many articles with one author)
-    private Author author;
+    private User user;
 
-    private Article()
+    public Article()
     {
-    } //empty private constr. needed by JPA
+    } //empty constr. needed by JPA
 
-    public Article(String title)
+    public long getId()
     {
-        this.title = title;
+        return id;
+    }
+
+    public void setId(long id)
+    {
+        this.id = id;
     }
 
     public String getTitle()
@@ -94,20 +99,20 @@ public class Article
         this.posted = posted;
     }
 
-    public Author getAuthor()
+    public User getUser()
     {
-        return author;
+        return user;
     }
 
-    public void setAuthor(Author author)
+    public void setUser(User user)
     {
-        this.author = author;
+        this.user = user;
     }
 
     @Override
     public String toString()
     {
-        return "Article{" + "title=" + title + '}';
+        return "Article{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", teaser=" + teaser + ", body=" + body + ", posted=" + posted + ", user=" + user + '}';
     }
 
 }

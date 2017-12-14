@@ -3,7 +3,14 @@
 
 <head th:replace="layout :: head"></head>
 
+<!--CSS FOR THIS FRAGMENT-->
+<link rel="stylesheet" href="../static/css/register.css" th:href=@{/css/register.css}>
+
 <body>
+
+    <!--    javascript for disabling spaces in username-->
+    <script src="../static/js/register.js" th:src="@{/js/register.js}"></script>
+
     <div th:replace="layout :: navbar"></div>
 
     <div id="content" class="comtainer jumbotron">
@@ -13,7 +20,7 @@
             <input type="hidden" th:field="*{id}" />
 
             <label for="username">Username</label>:
-            <input type="text" id="username" name="username" autofocus="autofocus" required="true" th:field="*{username}" /> <br />
+            <input type="text" id="username" name="username" autofocus="autofocus" required="true" th:field="*{username}" pattern="[^\s]+" title="Username can't contain spaces." /> <br />
 
             <label for="email">E-mail</label>:
             <input type="email" id="email" name="email" autofocus="autofocus" required="true" th:field="*{email}" /> <br />
@@ -25,6 +32,7 @@
         </form>
 
     </div>
+    <!--    <button onclick="myFunction()">bla</button>-->
     <div th:replace="layout :: footer"></div>
 </body>
 

@@ -1,11 +1,9 @@
 package djuricadjuricic.it355dz.service;
 
 import djuricadjuricic.it355dz.domain.Article;
-import djuricadjuricic.it355dz.domain.Author;
 import djuricadjuricic.it355dz.domain.Role;
 import djuricadjuricic.it355dz.domain.User;
 import djuricadjuricic.it355dz.repository.ArticleRepository;
-import djuricadjuricic.it355dz.repository.AuthorRepository;
 import djuricadjuricic.it355dz.repository.RoleRepository;
 import djuricadjuricic.it355dz.repository.UserRepository;
 import java.util.Date;
@@ -20,16 +18,14 @@ public class DataLoader //used to load data without using a external file
 {
     //declare all EntityRepositories that you will be writing into
     private ArticleRepository articleRepository;
-    private AuthorRepository authorRepository;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     
     //make a Autowired DataLoader like below ( //COMMENT IT OUT TO DISABLE THIS DATALOADER )
     @Autowired
-    public DataLoader(ArticleRepository articleRepository, AuthorRepository authorRepository, UserRepository userRepository, RoleRepository roleRepository)
+    public DataLoader(ArticleRepository articleRepository, UserRepository userRepository, RoleRepository roleRepository)
     {
         this.articleRepository = articleRepository;
-        this.authorRepository = authorRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -37,77 +33,90 @@ public class DataLoader //used to load data without using a external file
     @PostConstruct //runs after Bean created
     private void loadData() //fill database with desired data
     {
-       
+        //adding roles
+        Role r1 = new Role("ROLE_USER");
+        Role r2 = new Role("ROLE_ADMIN");        
+        
+        Set<Role> userRole = new HashSet<Role>(); // set of roles with only the user role added
+        userRole.add(r1);
+        
+        Set<Role> bothRoles = new HashSet<Role>(); // set of roles containing both roles
+        bothRoles.add(r1);
+        bothRoles.add(r2);
+
+        //adding users
         User u1 = new User();
-        u1.setUsername("Djurica Djuricic");
+        u1.setUsername("djuro");
         u1.setPassword("123123");
         u1.setEmail("djurica.djuricic.2727@metropolitan.ac.rs");
-        
-        Author author1 = new Author("Djurica Djuricic");
-        author1.setAbout("The founder of this site. He was once a fat fuck but he searched the depths of the internet to find his"+
+        u1.setAbout("The founder of this site. He was once a fat fuck but he searched the depths of the internet to find his"+
                 " salvation. Once he reached godly aesthetics, he made this site, in hopes to save all the fat cunts.");
+        u1.setRoles(bothRoles);
         
-        author1.setUser(u1);
-        u1.setAuthor(author1);
+        User u2 = new User();
+        u2.setUsername("zyzz");
+        u2.setPassword("123123");
+        u2.setEmail("zy@zz.com");
+        u2.setAbout("The aesthetic god himself. His transformation from a WoW geek to a diety has inspired milions.");
+        u2.setRoles(userRole);
         
+        Set<User> users = new HashSet<User>();
+        users.add(u1);
+        users.add(u2);
         
-        Author author2 = new Author("Zyzz");
-        author2.setAbout("The aesthetic god himself. His transformation from a WoW geek to a diety has inspired milions.");
-        //author2.setUser(u1);
+        Set<User> admins = new HashSet<User>();
+        admins.add(u1);
         
-        Article article1 = new Article("First steps");
-        article1.setSlug("first-steps");
-        article1.setTeaser("The journey to aesthetics is not a short one, nor is it easy. This article covers the basics you"+
+        //adding articles
+        Article a1 = new Article();
+        a1.setTitle("First steps");
+        a1.setSlug("first-steps");
+        a1.setTeaser("The journey to aesthetics is not a short one, nor is it easy. This article covers the basics you"+
                 "should master to get your dream body...");
-        article1.setBody("The journey to aesthetics is not a short one, nor is it easy. This article covers the basics you"+
+        a1.setBody("The journey to aesthetics is not a short one, nor is it easy. This article covers the basics you"+
                 "should master to get your dream body...<br> Aenean fermentum aliquet tellus. Maecenas in mauris ipsum. Nunc malesuada nisi eget eros egestas, "
                 + "vitae facilisis felis tincidunt. Nunc eleifend mauris lacus, at maximus felis scelerisque sit amet. Curabitur ullamcorper est et turpis eleifend, at feugiat lorem consectetur."
                 + " Morbi nec varius ante, in ultricies nibh. Donec dignissim vel nunc in pellentesque. Quisque mollis tellus a malesuada sagittis. Vivamus nec lacus id felis efficitur hendrerit non non lorem. In vehicula interdum leo et condimentum."
                 + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
-        article1.setPosted(new Date());
-        article1.setAuthor(author1);
+        a1.setPosted(new Date());
+        a1.setUser(u1);
         
-        
-        Article article2 = new Article("Dieting");
-        article2.setSlug("dieting");
-        article2.setTeaser("Dieting is the hardest this to lay grasp on as no ones body is the same"
+        Article a2 = new Article();
+        a2.setTitle("Dieting");
+        a2.setSlug("dieting");
+        a2.setTeaser("Dieting is the hardest this to lay grasp on as no ones body is the same"
                 + "in this article, we're going to talk about the basics to getting that six-pack shining...");
-        article2.setBody("Dieting is the hardest this to lay grasp on as no ones body is the same"
+        a2.setBody("Dieting is the hardest this to lay grasp on as no ones body is the same"
                 + "in this article, we're going to talk about the basics to getting that six-pack shining..."
                 + "<br>Aenean fermentum aliquet tellus. Maecenas in mauris ipsum. Nunc malesuada nisi eget eros egestas, "
                 + "vitae facilisis felis tincidunt. Nunc eleifend mauris lacus, at maximus felis scelerisque sit amet. Curabitur ullamcorper est et turpis eleifend, at feugiat lorem consectetur."
                 + " Morbi nec varius ante, in ultricies nibh. Donec dignissim vel nunc in pellentesque. Quisque mollis tellus a malesuada sagittis. Vivamus nec lacus id felis efficitur hendrerit non non lorem. In vehicula interdum leo et condimentum."
                 + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
-        article2.setPosted(new Date());
-        article2.setAuthor(author2);
+        a2.setPosted(new Date());
+        a2.setUser(u1);
         
-        Role r1 = new Role("ROLE_AUTHOR");
-        Role r2 = new Role("ROLE_ADMIN");
-        Role r3 = new Role("ROLE_USER");
-        
-        Set<User> users = new HashSet<User>();
-        users.add(u1);
-        Set<Role> roles = new HashSet<Role>();
-        roles.add(r1);
-
-        u1.setRoles(roles);
-        r1.setUsers(users);
-        
-        
-        userRepository.save(u1);
-        
-        
-        authorRepository.save(author1);
-        //authorRepository.save(author2);
-        
-        articleRepository.save(article1);
-        //articleRepository.save(article2);
-        
-        
+        Article a3 = new Article();
+        a3.setTitle("Muzzin");
+        a3.setSlug("muzzin");
+        a3.setTeaser("Muzzin is an art form. You've packed on some muscle, but plain on flexing isn't gonna cut it."
+                + "In this article, we're going to teach you to present your body and appear casual yet stunning...");
+        a3.setBody("Muzzin is an art form. You've packed on some muscle, but plain on flexing isn't gonna cut it."
+                + "In this article, we're going to teach you to present your body and appear casual yet stunning..."
+                + "<br>Aenean fermentum aliquet tellus. Maecenas in mauris ipsum. Nunc malesuada nisi eget eros egestas, "
+                + "vitae facilisis felis tincidunt. Nunc eleifend mauris lacus, at maximus felis scelerisque sit amet. Curabitur ullamcorper est et turpis eleifend, at feugiat lorem consectetur."
+                + " Morbi nec varius ante, in ultricies nibh. Donec dignissim vel nunc in pellentesque. Quisque mollis tellus a malesuada sagittis. Vivamus nec lacus id felis efficitur hendrerit non non lorem. In vehicula interdum leo et condimentum."
+                + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
+        a3.setPosted(new Date());
+        a3.setUser(u2);        
         
         roleRepository.save(r1);
         roleRepository.save(r2);
-        roleRepository.save(r3);
         
+        userRepository.save(u1);
+        userRepository.save(u2);
+        
+        articleRepository.save(a1);
+        articleRepository.save(a2);
+        articleRepository.save(a3);
     }
 }
