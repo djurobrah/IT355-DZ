@@ -57,6 +57,11 @@ public class User
     {
     } //empty constr. needed by JPA
 
+    public int postCount()
+    {
+        return this.getArticles().size();
+    }
+    
     public Long getId()
     {
         return id;

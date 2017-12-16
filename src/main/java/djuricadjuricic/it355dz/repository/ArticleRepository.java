@@ -11,4 +11,6 @@ public interface ArticleRepository extends CrudRepository<Article, Long> //param
     public Article findBySlug(String slug);
 
     public Iterable<Article> findArticlesByOrderByPostedDesc();
+
+    public Iterable<Article> findAllByUser_id(long userID);
 }

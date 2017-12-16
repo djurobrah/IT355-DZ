@@ -42,8 +42,8 @@
         <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/articles/' ? 'active':''}">
             <a class="nav-link" href="../articles.html" th:href="@{/articles/}"><span>Articles</span></a>
         </li>
-        <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/authors/' ? 'active':''}">
-            <a class="nav-link" href="../authors.html" th:href="@{/authors/}"><span>Authors</span></a>
+        <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/users/' ? 'active':''}">
+            <a class="nav-link" href="../users.html" th:href="@{/users/}"><span>Users</span></a>
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">

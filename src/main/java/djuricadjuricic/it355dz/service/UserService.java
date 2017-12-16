@@ -45,4 +45,8 @@ public class UserService implements UserDetailsService//used to load a single en
         userRepository.save(user);
     }
     
+    public Iterable<User> findAll()
+    {
+        return userRepository.findAll();
+    }
 }

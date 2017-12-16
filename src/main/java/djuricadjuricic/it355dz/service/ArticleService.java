@@ -28,4 +28,9 @@ public class ArticleService //used to load a single entity into db
         return articleRepository.findArticlesByOrderByPostedDesc();
     }
     
+    public Iterable<Article> findAllByUser_id(long userID)
+    {
+        return articleRepository.findAllByUser_id(userID);
+    }
+    
 }

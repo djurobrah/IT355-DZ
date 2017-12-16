@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 authorizeRequests().
                     antMatchers("/").permitAll().//this mapping is open to anyone
                     antMatchers("/about/").permitAll(). 
-                    antMatchers("/authors/").permitAll().
+                    antMatchers("/users/**").hasAnyRole("ADMIN", "USER").
                     antMatchers("/register/").permitAll().
                     antMatchers("/register-success/").permitAll().
                     antMatchers("/articles/**").hasAnyRole("ADMIN", "USER").

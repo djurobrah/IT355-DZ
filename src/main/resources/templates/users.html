@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head"></head>
+
+
+<body>
+    <div th:replace="layout :: navbar"></div>
+
+    <div id="content" class="container">
+        <!-- Introduction Row -->
+        <h1 class="my-4">A3STH3TIC
+            <small>users</small>
+        </h1>
+        <p>Here you will find the best of the best! A3STH3TIC users with the highest ranking.
+            <br> Read their articles so you can become one of them!
+        </p>
+        <hr/>
+
+        <!-- Team Members Row -->
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 text-center mb-4" th:each="user : ${users}">
+                <img class="rounded-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
+                <h3 th:text="${user.username}">Username</h3>
+                <p th:if="${user.postCount()} &gt; 0">
+                    <a th:if="${user.postCount()} == 1" class="btn btn-link" href="#" th:href="|@{/users/}${user.username}|" role="button" th:text="'View ' + ${user.postCount()} + ' article »'">See 1 article »</a>
+                    <a th:unless="${user.postCount()} == 1" class="btn btn-link" href="#" th:href="|@{/users/}${user.username}|" role="button" th:text="'View ' + ${user.postCount()} + ' articles »'">See N articles »</a>
+                </p>
+                <p th:text="${user.about}">About the user!</p>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="layout :: footer"></div>
+</body>
+
+</html>
