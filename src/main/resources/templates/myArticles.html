@@ -3,19 +3,34 @@
 
 <head th:replace="layout :: head"></head>
 
+<!--CSS FOR THIS FRAGMENT-->
+<link rel="stylesheet" href="../static/css/myArticles.css" th:href=@{/css/myArticles.css}>
+
 <body>
     <div th:replace="layout :: navbar"></div>
 
     <hr/>
     <div id="content" class="container">
+
+        <p th:if="${articleAdded}" class="alert alert-success">Article successfully added.</p>
+
+        <p id="addButton">
+            <a class="btn btn-success btn-lg" href="articleForm.html" th:href="@{/articles/myArticles/create/}" role="button">+ Create new article</a>
+        </p>
+
         <h1 th:if="${articles != null}">My articles:</h1>
         <h1 th:if="${articles == null}">You haven't posted any articles yet.</h1>
         <hr/>
 
-
-
         <div th:each="article : ${articles}">
-            <h1><a th:text="${article.title}" href="articleView.html" th:href="|@{/articles/view/}${article.slug}|">Article title</a></h1>
+            <h1 class="inline">
+                <a th:text="${article.title}" href="articleView.html" th:href="|@{/articles/}${article.slug}|">Article title</a>
+            </h1>
+            <div class="inline right">
+                <a class="btn btn-warning btn-lg" href="users.html" th:href="@{/users/}" role="button"> Edit article</a>
+                <a class="btn btn-danger btn-lg" href="myArticles.html" th:href="|@{/articles/myArticles/}${article.id}|" role="button" method="delete"> Delete article</a>
+            </div>
+
             <p th:text="|Created by ${article.user.username} on ${#calendars.format(article.posted,'M/dd/yyyy hh:mm')}|">
                 Created by Username on M/dd/yy hh:mm
             </p>
@@ -26,9 +41,10 @@
             <!--        divider-->
             <hr/>
         </div>
-        <p>
-            <a th:if="${user != null}" class="btn btn-primary btn-lg" href="users.html" th:href="@{/users/}" role="button">« Back to users</a>
-        </p>
+
+        <a th:if="${user != null}" class="btn btn-primary btn-lg" href="users.html" th:href="@{/users/}" role="button">« Back to users</a>
+
+
     </div>
 
     <div th:replace="layout :: footer"></div>

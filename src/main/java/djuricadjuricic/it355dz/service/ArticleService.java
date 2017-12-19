@@ -33,4 +33,14 @@ public class ArticleService //used to load a single entity into db
         return articleRepository.findAllByUser_id(userID);
     }
     
+    public void delete(long id)
+    {
+        articleRepository.delete(id);
+    }
+    
+    public void save(Article article)
+    {
+        articleRepository.save(article);
+    }
+    
 }

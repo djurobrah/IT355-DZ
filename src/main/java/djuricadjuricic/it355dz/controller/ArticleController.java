@@ -1,8 +1,10 @@
 package djuricadjuricic.it355dz.controller;
 
+import djuricadjuricic.it355dz.domain.Article;
 import djuricadjuricic.it355dz.domain.User;
 import djuricadjuricic.it355dz.service.ArticleService;
 import djuricadjuricic.it355dz.service.UserService;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 //@Controller if forwarding a html, @RestController if forwarding Strings etc.
 
@@ -44,15 +48,46 @@ public class ArticleController
     }
     
     @RequestMapping("/myArticles")
-    public String articlesByAuthor(Model model)
+    public String myArticles(Model model)
     {
-        //attributes that we forward to the mapped page
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
         User user = userService.findByUsername(currentUsername);
         model.addAttribute("articles", articleService.findAllByUser_id(user.getId()));
         model.addAttribute("user", user);
         return "myArticles";
+    }
+    
+    @RequestMapping("/myArticles/create")
+    public String articlesByAuthor(Model model)
+    {
+        //attributes that we forward to the mapped page
+        
+        model.addAttribute("article", new Article());
+        return "articleForm";
+    }
+    
+    @RequestMapping(value = "/myArticles/create-success", method = RequestMethod.POST)
+    public String createSuccess(Article article, Model model, RedirectAttributes redirectAttributes)
+    {
+        //attributes that we forward to the mapped page
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        User user = userService.findByUsername(currentUsername);
+        article.setPosted(new Date());
+        article.setUser(user);
+        articleService.save(article);
+        //redirectAttributes.addFlashAttribute("articleAdded", true);
+        return "redirect:/articles/myArticles/";
+    }
+    
+    @RequestMapping(value = "/myArticles/{id}", method = RequestMethod.DELETE)
+    public String deleteArticle(@PathVariable(value = "id")long id, Model model)
+    {
+        //attributes that we forward to the mapped page
+        //model.addAttribute("registerSuccess", true);
+        articleService.delete(id);
+        return "about";
     }
     
     //Requesting mapping for all links that can be reached through this page (that don't have their controller)

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head"></head>
+
+<!--CSS FOR THIS FRAGMENT-->
+<link rel="stylesheet" href="../static/css/register.css" th:href=@{/css/register.css}>
+
+<body>
+
+    <!--    javascript for disabling spaces in username-->
+    <!--    <script src="../static/js/register.js" th:src="@{/js/register.js}"></script>-->
+
+    <div th:replace="layout :: navbar"></div>
+
+    <div id="content" class="container jumbotron">
+        <h1>Create a new post</h1>
+
+        <form th:object="${article}" th:action="@{/articles/myArticles/create-success/}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="title">Title</label>:
+            <input type="text" id="title" name="title" autofocus="autofocus" required="true" th:field="*{title}" /> <br />
+
+            <label for="slug">Slug</label>:
+            <input type="text" id="slug" name="slug" required="true" th:field="*{slug}" pattern="[^\s]+" title="Slug can't contain spaces." /> <br/>
+
+            <label for="teaser">Teaser</label>:<br />
+            <textarea type="text" id="teaser" name="teaser" autofocus="autofocus" required="true" th:field="*{teaser}" cols="50" rows="5" maxlength="150"></textarea><br />
+
+            <label for="body">Body</label>:<br />
+            <textarea type="text" id="body" name="body" autofocus="autofocus" required="true" th:field="*{body}" cols="80" rows="10"></textarea><br />
+
+            <input type="submit" class="btn btn-lg" />
+        </form>
+
+    </div>
+    <!--    <button onclick="myFunction()">bla</button>-->
+    <div th:replace="layout :: footer"></div>
+</body>
+
+</html>
