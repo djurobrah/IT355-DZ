@@ -5,6 +5,8 @@ import djuricadjuricic.it355dz.service.ArticleService;
 import djuricadjuricic.it355dz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,7 @@ public class ArticleController
     //Model atributes should be provided by an Autowired service
     @Autowired
     ArticleService articleService;
-    
+        
     @Autowired
     UserService userService;
     
@@ -33,7 +35,7 @@ public class ArticleController
         return "articles";
     }
     
-    @RequestMapping("/view/{slug}")
+    @RequestMapping("/{slug}")
     public String view(@PathVariable(value = "slug")String slug, Model model)
     {
         //attributes that we forward to the mapped page
@@ -41,15 +43,17 @@ public class ArticleController
         return "articleView";
     }
     
-//    @RequestMapping("/{username}")
-//    public String articlesByAuthor(@PathVariable(value = "username")String username, Model model)
-//    {
-//        //attributes that we forward to the mapped page
-//        User user = userService.findByUsername(username);
-//        Author author = authorService.findById(user.getId());
-//        model.addAttribute("articlesByAuthor", articleService.g));
-//        return "articleView";
-//    }
+    @RequestMapping("/myArticles")
+    public String articlesByAuthor(Model model)
+    {
+        //attributes that we forward to the mapped page
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        User user = userService.findByUsername(currentUsername);
+        model.addAttribute("articles", articleService.findAllByUser_id(user.getId()));
+        model.addAttribute("user", user);
+        return "myArticles";
+    }
     
     //Requesting mapping for all links that can be reached through this page (that don't have their controller)
     

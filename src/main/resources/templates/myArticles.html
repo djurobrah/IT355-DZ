@@ -8,14 +8,14 @@
 
     <hr/>
     <div id="content" class="container">
-        <h1 th:if="${user != null}" th:text="${'Posts by ' + user.username + ' :'}">Posts by X</h1>
-        <h1 th:if="${user == null}">Latest posts:</h1>
+        <h1 th:if="${articles != null}">My articles:</h1>
+        <h1 th:if="${articles == null}">You haven't posted any articles yet.</h1>
         <hr/>
 
 
 
         <div th:each="article : ${articles}">
-            <h1><a th:text="${article.title}" href="articleView.html" th:href="|@{/articles/}${article.slug}|">Article title</a></h1>
+            <h1><a th:text="${article.title}" href="articleView.html" th:href="|@{/articles/view/}${article.slug}|">Article title</a></h1>
             <p th:text="|Created by ${article.user.username} on ${#calendars.format(article.posted,'M/dd/yyyy hh:mm')}|">
                 Created by Username on M/dd/yy hh:mm
             </p>

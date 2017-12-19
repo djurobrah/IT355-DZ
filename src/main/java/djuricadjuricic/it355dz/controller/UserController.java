@@ -3,7 +3,6 @@ package djuricadjuricic.it355dz.controller;
 import djuricadjuricic.it355dz.domain.User;
 import djuricadjuricic.it355dz.service.ArticleService;
 import djuricadjuricic.it355dz.service.UserService;
-import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
