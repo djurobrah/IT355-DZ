@@ -42,5 +42,10 @@ public class ArticleService //used to load a single entity into db
     {
         articleRepository.save(article);
     }
+
+    public Article findById(long id)
+    {
+        return articleRepository.findOne(id);
+    }
     
 }
