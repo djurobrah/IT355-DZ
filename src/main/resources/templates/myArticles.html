@@ -14,6 +14,7 @@
 
         <p th:if="${articleAdded}" class="alert alert-success">Article successfully added.</p>
         <p th:if="${articleDeleted}" class="alert alert-success">Article successfully deleted.</p>
+        <p th:if="${articleEdited}" class="alert alert-success">Article successfully edited.</p>
 
         <p id="addButton">
             <a class="btn btn-success btn-lg" href="articleForm.html" th:href="@{/articles/myArticles/create/}" role="button">+ Create new article</a>

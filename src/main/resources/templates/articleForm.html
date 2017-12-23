@@ -17,6 +17,7 @@
         <h1 th:if="${article.title == null}">Create a new post</h1>
         <h1 th:if="${article.title != null}">Edit post</h1>
 
+        <!--        <form th:object="${article}" th:action="@{'/articles/myArticles/{id}'(id=${article.id})}" th:method="${article.id &gt; 0} ? 'put' : 'post'">-->
         <form th:object="${article}" th:action="@{/articles/myArticles/create-success/}" method="post">
             <input type="hidden" th:field="*{id}" />
 

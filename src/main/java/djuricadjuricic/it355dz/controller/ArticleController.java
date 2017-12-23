@@ -97,7 +97,7 @@ public class ArticleController
         model.addAttribute("article", articleService.findById(id));
         return "articleForm";
     }
-    
+
 
     @RequestMapping(value = "/myArticles/{id}", method = RequestMethod.DELETE)
 //    public @ResponseBody
