@@ -79,13 +79,21 @@ public class ArticleController
     public String createSuccess(Article article, Model model, RedirectAttributes redirectAttributes)
     {
         //attributes that we forward to the mapped page
+        if(article.getTitle().equals(""))
+        {
+            redirectAttributes.addFlashAttribute("articleAdded", true);
+        }
+        else
+        {
+           redirectAttributes.addFlashAttribute("articleEdited", true); 
+        }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
         User user = userService.findByUsername(currentUsername);
         article.setPosted(new Date());
         article.setUser(user);
         articleService.save(article);
-        redirectAttributes.addFlashAttribute("articleAdded", true);
+        
         return "redirect:/articles/myArticles/";
     }
 
