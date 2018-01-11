@@ -35,6 +35,10 @@ public class ArticleController
     @RequestMapping("/")
     public String articles(Model model)
     {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        User user = userService.findByUsername(currentUsername);
+        model.addAttribute("currentUser", user);
         model.addAttribute("articles", articleService.findAllByOrderByPostedDesc());
         return "articles";
     }

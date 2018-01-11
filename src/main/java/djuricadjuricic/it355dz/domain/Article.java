@@ -35,6 +35,9 @@ public class Article
     @ManyToOne //needed by Hibernate engine (we have many articles with one author)
     private User user;
 
+    @ManyToOne //needed by Hibernate engine (we have many articles with one author)
+    private ArticleType articleType;
+    
     public Article()
     {
     } //empty constr. needed by JPA
@@ -109,10 +112,22 @@ public class Article
         this.user = user;
     }
 
+    public ArticleType getArticleType()
+    {
+        return articleType;
+    }
+
+    public void setArticleType(ArticleType articleType)
+    {
+        this.articleType = articleType;
+    }
+
     @Override
     public String toString()
     {
-        return "Article{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", teaser=" + teaser + ", body=" + body + ", posted=" + posted + ", user=" + user + '}';
+        return "Article{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", teaser=" + teaser + ", body=" + body + ", posted=" + posted + ", user=" + user + ", articleType=" + articleType + '}';
     }
+    
+    
 
 }

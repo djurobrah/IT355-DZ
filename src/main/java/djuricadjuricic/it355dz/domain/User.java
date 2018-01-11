@@ -36,6 +36,9 @@ public class User
     @Column(columnDefinition = "TEXT") //when varchar(255) is not enough
     private String about;
     
+    @Column(nullable = false)
+    private boolean Premium;
+    
     @OneToMany(mappedBy = "user") //needed by Hibernate engine (one user. has many art.) (mappedBy - who's the owner of this rel.)
     List<Article> articles;
 
@@ -132,11 +135,24 @@ public class User
         this.roles = roles;
     }
 
+    public boolean isPremium()
+    {
+        return Premium;
+    }
+
+    public void setPremium(boolean Premium)
+    {
+        this.Premium = Premium;
+    }
+
+
     @Override
     public String toString()
     {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", about=" + about + ", articles=" + articles + ", roles=" + roles + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", about=" + about + ", Premium=" + Premium + ", articles=" + articles + ", roles=" + roles + '}';
     }
+
+    
     
 
 }   

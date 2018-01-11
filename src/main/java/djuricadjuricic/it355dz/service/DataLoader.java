@@ -1,10 +1,12 @@
 package djuricadjuricic.it355dz.service;
 
 import djuricadjuricic.it355dz.domain.Article;
+import djuricadjuricic.it355dz.domain.ArticleType;
 import djuricadjuricic.it355dz.domain.Role;
 import djuricadjuricic.it355dz.domain.User;
 import djuricadjuricic.it355dz.repository.ArticleRepository;
 import djuricadjuricic.it355dz.repository.RoleRepository;
+import djuricadjuricic.it355dz.repository.TypeRepository;
 import djuricadjuricic.it355dz.repository.UserRepository;
 import java.util.Date;
 import java.util.HashSet;
@@ -20,19 +22,26 @@ public class DataLoader //used to load data without using a external file
     private ArticleRepository articleRepository;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private TypeRepository typeRepository;
     
     //make a Autowired DataLoader like below ( //COMMENT IT OUT TO DISABLE THIS DATALOADER )
     @Autowired
-    public DataLoader(ArticleRepository articleRepository, UserRepository userRepository, RoleRepository roleRepository)
+    public DataLoader(ArticleRepository articleRepository, UserRepository userRepository, RoleRepository roleRepository, TypeRepository typeRepository)
     {
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.typeRepository = typeRepository;
     }
     
     @PostConstruct //runs after Bean created
     private void loadData() //fill database with desired data
     {
+        //adding articleTypes
+        ArticleType at1 = new ArticleType("pending");
+        ArticleType at2 = new ArticleType("allowed");
+        ArticleType at3 = new ArticleType("approved");
+        
         //adding roles
         Role r1 = new Role("ROLE_USER");
         Role r2 = new Role("ROLE_ADMIN");        
@@ -51,6 +60,7 @@ public class DataLoader //used to load data without using a external file
         u1.setEmail("djurica.djuricic.2727@metropolitan.ac.rs");
         u1.setAbout("The founder of this site. He was once a fat fuck but he searched the depths of the internet to find his"+
                 " salvation. Once he reached godly aesthetics, he made this site, in hopes to save all the fat cunts.");
+        u1.setPremium(true);
         u1.setRoles(bothRoles);
         
         User u2 = new User();
@@ -58,6 +68,7 @@ public class DataLoader //used to load data without using a external file
         u2.setPassword("123123");
         u2.setEmail("zy@zz.com");
         u2.setAbout("The aesthetic god himself. His transformation from a WoW geek to a diety has inspired milions.");
+        u2.setPremium(false);
         u2.setRoles(userRole);
         
         Set<User> users = new HashSet<User>();
@@ -80,6 +91,7 @@ public class DataLoader //used to load data without using a external file
                 + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
         a1.setPosted(new Date());
         a1.setUser(u1);
+        a1.setArticleType(at1);
         
         Article a2 = new Article();
         a2.setTitle("Dieting");
@@ -94,6 +106,7 @@ public class DataLoader //used to load data without using a external file
                 + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
         a2.setPosted(new Date());
         a2.setUser(u1);
+        a1.setArticleType(at1);
         
         Article a3 = new Article();
         a3.setTitle("Muzzin");
@@ -108,6 +121,11 @@ public class DataLoader //used to load data without using a external file
                 + " Nulla posuere est lacus, vel convallis enim sodales ut. Ut feugiat tincidunt aliquam. Vestibulum finibus, arcu et pellentesque ultricies, ante metus ornare est, vitae condimentum lacus ante nec dolor. Maecenas ac sagittis nisi, nec convallis arcu. Aenean bibendum quis ligula vitae dignissim.");
         a3.setPosted(new Date());
         a3.setUser(u2);        
+        a1.setArticleType(at1);
+        
+        typeRepository.save(at1);
+        typeRepository.save(at2);
+        typeRepository.save(at3);
         
         roleRepository.save(r1);
         roleRepository.save(r2);

@@ -8,8 +8,15 @@
 
     <hr/>
     <div id="content" class="container">
+
+        <div th:if="${!currentUser.isPremium()}">
+            <p><a class="btn btn-primary btn-lg" href="about.html" th:href="@{/about/}" role="button">Ovo vidi kad nije premium »</a>
+            </p>
+        </div>
+
+
         <h1 th:if="${user != null}" th:text="${'Posts by ' + user.username + ' :'}">Posts by X</h1>
-        <h1 th:if="${user == null}">Latest posts:</h1>
+        <h1 th:if="${user == null}">Latest articles:</h1>
         <hr/>
 
 
