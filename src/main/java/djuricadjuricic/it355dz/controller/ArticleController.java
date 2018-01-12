@@ -3,6 +3,7 @@ package djuricadjuricic.it355dz.controller;
 import djuricadjuricic.it355dz.domain.Article;
 import djuricadjuricic.it355dz.domain.User;
 import djuricadjuricic.it355dz.service.ArticleService;
+import djuricadjuricic.it355dz.service.TypeService;
 import djuricadjuricic.it355dz.service.UserService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class ArticleController
     @Autowired
     UserService userService;
 
+    @Autowired
+    TypeService typeService;
+    
 //    @Secured("ROLE_USER") //declare which user role can access this. For mult. roles use ({"dfds", "dfgdfg"}
     @RequestMapping("/")
     public String articles(Model model)
@@ -39,7 +43,7 @@ public class ArticleController
         String currentUsername = authentication.getName();
         User user = userService.findByUsername(currentUsername);
         model.addAttribute("currentUser", user);
-        model.addAttribute("articles", articleService.findAllByOrderByPostedDesc());
+        model.addAttribute("articles", articleService.findAllowednApproved());
         return "articles";
     }
 
@@ -49,6 +53,53 @@ public class ArticleController
         //attributes that we forward to the mapped page
         model.addAttribute("article", articleService.getBySlug(slug));
         return "articleView";
+    }
+    
+    @RequestMapping("/pending")
+    public String pending(Model model)
+    {
+        Iterable<Article> articles = articleService.findPending();
+        int articlesSize = 0;
+        for (Article article : articles)
+        {
+            articlesSize++;
+        }
+        model.addAttribute("articles", articles);
+        model.addAttribute("articlesSize", articlesSize);
+        return "pendingArticles";
+    }
+    
+    @RequestMapping(value = "/pending/{id}", method = RequestMethod.PUT)
+//    public @ResponseBody
+    String allowPendingArticle(@PathVariable(value = "id") long id, Model model, RedirectAttributes redirectAttributes)
+    {
+        Article article = articleService.findById(id);
+        article.setType(typeService.getById(2));
+        articleService.save(article);
+        redirectAttributes.addFlashAttribute("articleAllowed", true);
+        return "redirect:/articles/pending/";
+    }
+    
+    @RequestMapping(value = "/pending/{id}", method = RequestMethod.POST)
+//    public @ResponseBody
+    String approvePendingArticle(@PathVariable(value = "id") long id, Model model, RedirectAttributes redirectAttributes)
+    {
+        Article article = articleService.findById(id);
+        article.setType(typeService.getById(3));
+        articleService.save(article);
+        redirectAttributes.addFlashAttribute("articleApproved", true);
+        return "redirect:/articles/pending/";
+    }
+    
+    @RequestMapping(value = "/pending/{id}", method = RequestMethod.DELETE)
+//    public @ResponseBody
+    String deletePendingArticle(@PathVariable(value = "id") long id, Model model, RedirectAttributes redirectAttributes)
+    {
+        //attributes that we forward to the mapped page
+        //model.addAttribute("registerSuccess", true);
+        articleService.delete(id);
+        redirectAttributes.addFlashAttribute("articleDeleted", true);
+        return "redirect:/articles/pending/";
     }
 
     @RequestMapping("/myArticles")
@@ -96,6 +147,7 @@ public class ArticleController
         User user = userService.findByUsername(currentUsername);
         article.setPosted(new Date());
         article.setUser(user);
+        article.setType(typeService.getById(1));
         articleService.save(article);
         
         return "redirect:/articles/myArticles/";
@@ -122,14 +174,4 @@ public class ArticleController
         return "redirect:/articles/myArticles/";
     }
 
-
-    //Requesting mapping for all links that can be reached through this page (that don't have their controller)
-//    @RequestMapping("/sta")
-//    public String sta(Model model)
-//    {
-//        //attributes that we forward to the mapped page
-//        
-//        //model.addAttribute("prcatr", "bla");
-//        return "sta";
-//    }
 }

@@ -48,4 +48,23 @@ public class ArticleService //used to load a single entity into db
         return articleRepository.findOne(id);
     }
     
+    public Iterable<Article> findPending()
+    {
+        return articleRepository.findAllByType_id(1);
+    }
+    
+    public Iterable<Article> findAllowed()
+    {
+        return articleRepository.findAllByType_id(2);
+    }
+    
+    public Iterable<Article> findApproved()
+    {
+        return articleRepository.findAllByType_id(3);
+    }
+    
+    public Iterable<Article> findAllowednApproved()
+    {
+        return articleRepository.findAllByType_idGreaterThan(1);
+    }
 }

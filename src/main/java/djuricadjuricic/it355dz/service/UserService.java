@@ -49,4 +49,9 @@ public class UserService implements UserDetailsService//used to load a single en
     {
         return userRepository.findAll();
     }
+    
+    public User findById(long id)
+    {
+        return userRepository.findOne(id);
+    }
 }

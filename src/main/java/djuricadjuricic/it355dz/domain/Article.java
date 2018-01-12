@@ -36,12 +36,39 @@ public class Article
     private User user;
 
     @ManyToOne //needed by Hibernate engine (we have many articles with one author)
-    private ArticleType articleType;
+    private Type type;
     
     public Article()
     {
     } //empty constr. needed by JPA
-
+    
+    public boolean isPending()
+    {
+        if(type.getType().equalsIgnoreCase("pending"))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isAllowed()
+    {
+        if(type.getType().equalsIgnoreCase("allowed"))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isApproved()
+    {
+        if(type.getType().equalsIgnoreCase("approved"))
+        {
+            return true;
+        }
+        return false;
+    }
+    
     public long getId()
     {
         return id;
@@ -112,20 +139,20 @@ public class Article
         this.user = user;
     }
 
-    public ArticleType getArticleType()
+    public Type getType()
     {
-        return articleType;
+        return type;
     }
 
-    public void setArticleType(ArticleType articleType)
+    public void setType(Type type)
     {
-        this.articleType = articleType;
+        this.type = type;
     }
 
     @Override
     public String toString()
     {
-        return "Article{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", teaser=" + teaser + ", body=" + body + ", posted=" + posted + ", user=" + user + ", articleType=" + articleType + '}';
+        return "Article{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", teaser=" + teaser + ", body=" + body + ", posted=" + posted + ", user=" + user + ", articleType=" + type + '}';
     }
     
     

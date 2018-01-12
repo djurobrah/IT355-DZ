@@ -1,19 +1,14 @@
 package djuricadjuricic.it355dz.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-public class ArticleType
+public class Type
 {
 
     @Id
@@ -22,15 +17,15 @@ public class ArticleType
 
     private String type;
     
-    @OneToMany(mappedBy = "articleType") //needed by Hibernate engine (one type. has multiple art.) (mappedBy - who's the owner of this rel.)
+    @OneToMany(mappedBy = "type") //needed by Hibernate engine (one type. has multiple art.) (mappedBy - who's the owner of this rel.)
     List<Article> articles;
 
-    public ArticleType(String role)
+    public Type(String type)
     {
-        this.type = role;
+        this.type = type;
     }
 
-    public ArticleType()
+    public Type()
     {
     } //empty constr. needed by JPA
 

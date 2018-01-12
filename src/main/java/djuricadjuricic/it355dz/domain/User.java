@@ -37,7 +37,7 @@ public class User
     private String about;
     
     @Column(nullable = false)
-    private boolean Premium;
+    private boolean premium;
     
     @OneToMany(mappedBy = "user") //needed by Hibernate engine (one user. has many art.) (mappedBy - who's the owner of this rel.)
     List<Article> articles;
@@ -137,19 +137,19 @@ public class User
 
     public boolean isPremium()
     {
-        return Premium;
+        return premium;
     }
 
-    public void setPremium(boolean Premium)
+    public void setPremium(boolean premium)
     {
-        this.Premium = Premium;
+        this.premium = premium;
     }
 
 
     @Override
     public String toString()
     {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", about=" + about + ", Premium=" + Premium + ", articles=" + articles + ", roles=" + roles + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", about=" + about + ", Premium=" + premium     + ", articles=" + articles + ", roles=" + roles + '}';
     }
 
     

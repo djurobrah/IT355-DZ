@@ -40,11 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         http.
                 authorizeRequests().
                     antMatchers("/").permitAll().//this mapping is open to anyone
-                    antMatchers("/about/").permitAll(). 
+                    antMatchers("/about/").permitAll().
+                    antMatchers("/articles/").hasAnyRole("ADMIN", "USER").
+                    antMatchers("/articles/{^[\\\\d]$}").hasAnyRole("ADMIN", "USER").
+                    antMatchers("/articles/myArticles/**").hasAnyRole("ADMIN", "USER").
+                    antMatchers("/articles/**").hasRole("ADMIN").
                     antMatchers("/users/**").hasAnyRole("ADMIN", "USER").
                     antMatchers("/register/").permitAll().
                     antMatchers("/register-success/").permitAll().
-                    antMatchers("/articles/**").hasAnyRole("ADMIN", "USER").
+                    
+                    //antMatchers("/articles/pending/").
                     anyRequest().authenticated().
                     antMatchers("/resources/static/**").permitAll().anyRequest().permitAll(). //without this line, Spring is unable to load static resourses.
                     //antMatchers("/webjars/**").permitAll(). // Spring Security permit if using webjars

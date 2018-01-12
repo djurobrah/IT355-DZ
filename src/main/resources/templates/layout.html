@@ -43,7 +43,7 @@
             <a class="nav-link" href="../articles.html" th:href="@{/articles/}"><span>Articles</span></a>
         </li>
         <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/pending/' ? 'active':''}">
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="../articles.html" th:href="@{/articles/}"><span>Pending articles</span></a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="pendingArticles.html" th:href="@{/articles/pending/}"><span>Pending articles</span></a>
         </li>
         <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/users/' ? 'active':''}">
             <a class="nav-link" href="../users.html" th:href="@{/users/}"><span>Users</span></a>
@@ -75,7 +75,7 @@
 <div loading...></div>
 
 
-<!--    HEADER  -->
+<!--    FOOTER  -->
 <div th:fragment="footer">
     <div class="col-sm-12">
         <div class="about">
